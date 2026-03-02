@@ -5,7 +5,7 @@ pipeline {
         maven 'maven3'
     }
     parameters {
-      string(name: 'sonar_IP', defaultValue: '54.226.11.106', description: 'IP of sonarqube')
+      string(name: 'sonar_IP', defaultValue: '100.54.191.181', description: 'IP of sonarqube')
     }
     environment {
       SONARQUBE_URL=${params.sonar_IP}
