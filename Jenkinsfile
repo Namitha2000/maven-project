@@ -6,17 +6,17 @@ pipeline {
         git 'Default'
     }
     parameters {
-      string(name: 'sonar_IP', defaultValue: '100.54.191.181', description: 'IP of sonarqube')
+      string(name: 'sonar_IP', defaultValue: '13.50.246.94', description: 'IP of sonarqube')
     }
     environment {
       SONARQUBE_URL="http://${params.sonar_IP}:9000"
-      SONARQUBE_TOKEN=credentials('Sonar-token')
+      SONARQUBE_TOKEN=credentials('sonar-token')
     }
     stages {
         stage('Checkout Code') {
             steps {
                 git branch: 'master',
-                    url: 'https://github.com/ShilpaLB28/maven-project.git'
+                    url: 'https://github.com/Namitha2000/maven-project.git'
             }
         }
         stage('Sonarqube Analysis') {
