@@ -5,13 +5,20 @@ pipeline {
         maven 'maven3'
         git 'Default'
     }
-    parameters {
-      string(name: 'sonar_IP', defaultValue: '13.50.246.94', description: 'IP of sonarqube')
+    
+     parameters {
+        string(name: 'sonar_IP', defaultValue: '13.50.246.94', description: 'IP of sonarqube')
+        string(name: 'nexus_IP', defaultValue: '16.16.195.162', description: 'IP of Nexus')
+        string(name: 'deploy_IP', defaultValue: '<YOUR_DEPLOY_EC2_IP>', description: 'IP of Deploy Server')
     }
-    environment {
-      SONARQUBE_URL="http://${params.sonar_IP}:9000"
-      SONARQUBE_TOKEN=credentials('sonar-token')
-    }
+
+     environment {
+        SONARQUBE_URL = "http://${params.sonar_IP}:9000"
+        SONARQUBE_TOKEN = credentials('sonar-token')
+        NEXUS_URL = "http://${params.nexus_IP}:8081/repository/maven-releases-repo/"
+    }    
+
+
     stages {
         stage('Checkout Code') {
             steps {
@@ -38,5 +45,16 @@ pipeline {
                 }
             }
         }
+       
+        stage('Deploy to Nexu'){
+            steps {
+                dir('webapp'){
+                   sh """
+                   mvn deploy -DskipTests \
+                   -DaltDeploymentRepository=nexus-releases::default::${NEXUS_URL}
+                }   
+             }
+        }
+
     }
 }
