@@ -18,7 +18,7 @@
   <distributionManagement>
     <repository>
       <id>nexus-releases</id>
-      <url>http://<NEXUS_EC2_IP>:8081/repository/maven-releases-repo/</url>
+      <url>http://16.16.195.162:8081/repository/maven-releases-repo/</url>
     </repository>
   </distributionManagement>
 
