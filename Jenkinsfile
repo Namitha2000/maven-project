@@ -6,7 +6,7 @@ pipeline {
         git 'Default'
     }
     parameters {
-        string(name: 'sonar_IP', defaultValue: '13.50.246.94', description: 'IP of sonarqube')
+        string(name: 'sonar_IP', defaultValue: '13.63.34.172', description: 'IP of sonarqube')
         string(name: 'nexus_IP', defaultValue: '16.16.195.162', description: 'IP of Nexus')
     }
     environment {
